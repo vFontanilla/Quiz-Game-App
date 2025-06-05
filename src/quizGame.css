@@ -1,0 +1,227 @@
+.quiz-container {
+  background-color: var(--surface-color);
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.quiz-header {
+  margin-bottom: 30px;
+}
+
+.quiz-header h1 {
+  font-size: 2.5em;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.quiz-header p {
+  font-size: 1.1em;
+  color: var(--text-color-muted);
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: var(--border-color);
+  border-radius: 25px;
+  margin-bottom: 20px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  border-radius: 25px;
+  transition: width 0.5s ease-in-out;
+  box-shadow: 0 0 10px var(--hover-glow);
+}
+
+.score-tracker {
+  font-size: 1em;
+  color: var(--text-color-muted);
+  margin-bottom: 30px;
+  text-align: right;
+}
+
+/* Question Component Styles */
+.question-card {
+  background-color: var(--surface-color); /* Same as container or slightly different */
+  padding: 25px;
+  border-radius: 10px;
+  /* border: 1px solid var(--border-color); */
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.question-text {
+  font-size: 1.4em;
+  margin-bottom: 25px;
+  color: var(--text-color);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+}
+
+.option-item {
+  background-color: var(--background-color); /* Darker than surface */
+  border: 1px solid var(--border-color);
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.option-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px var(--hover-glow);
+  transform: translateY(-2px);
+}
+
+.option-item.selected {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 0 15px var(--hover-glow);
+}
+
+.option-item.selected label {
+  color: white;
+  font-weight: 600;
+}
+
+.option-item input[type="radio"] {
+  display: none; /* Hide default radio */
+}
+
+.option-item label {
+  cursor: pointer;
+  width: 100%;
+  color: var(--text-color);
+  font-size: 1.05em;
+}
+
+.option-item.correct {
+  background-color: rgba(46, 204, 113, 0.15); /* Light green */
+  border-color: var(--correct-color);
+}
+.option-item.correct label {
+  color: var(--correct-color);
+  font-weight: 600;
+}
+
+.option-item.incorrect {
+  background-color: rgba(231, 76, 60, 0.15); /* Light red */
+  border-color: var(--incorrect-color);
+}
+.option-item.incorrect label {
+  color: var(--incorrect-color);
+  font-weight: 600;
+}
+
+
+.feedback-message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.feedback-message.correct {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: var(--correct-color);
+}
+
+.feedback-message.incorrect {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: var(--incorrect-color);
+}
+
+/* Button Styles */
+.quiz-button {
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  font-weight: 600;
+  border-radius: 25px; /* Pill shape */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  min-width: 200px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.quiz-button:hover {
+  opacity: 0.9;
+  box-shadow: 0 8px 20px var(--hover-glow), 0 5px 15px var(--shadow-color);
+  transform: translateY(-2px);
+}
+
+.quiz-button:disabled {
+  background: var(--border-color);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Results Component Styles */
+.results-summary {
+  margin-bottom: 25px;
+}
+
+.results-summary h2 {
+  font-size: 2em;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.results-summary p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.final-score {
+  font-size: 3em;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+.score-percentage {
+  font-size: 1.5em;
+  color: var(--secondary-color);
+  margin-bottom: 25px;
+}
+
+/* Animation for component transitions (optional) */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}

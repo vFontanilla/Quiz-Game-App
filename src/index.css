@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #6c5ce7; /* A modern purple */
+  --secondary-color: #a29bfe;
+  --background-color: #2c3e50; /* Dark blue-grey */
+  --surface-color: #34495e;   /* Slightly lighter surface */
+  --text-color: #ecf0f1;
+  --text-color-muted: #bdc3c7;
+  --correct-color: #2ecc71;
+  --incorrect-color: #e74c3c;
+  --border-color: #4a6178;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --hover-glow: rgba(108, 92, 231, 0.3); /* Primary color glow */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 700px; /* Max width for the quiz container */
+}
