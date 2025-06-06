@@ -80,6 +80,11 @@
   transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
+  word-wrap: break-word; 
+  white-space: normal; 
+  overflow-wrap: break-word;
+  width: 100%; 
+  box-sizing: border-box;
 }
 
 .option-item:hover {

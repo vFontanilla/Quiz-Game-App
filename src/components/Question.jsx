@@ -15,16 +15,18 @@ function Question({ question, questionNumber, selectedOptionId, setSelectedOptio
           <li
             key={option.id}
             className={`option-item ${option.id === selectedOptionId ? 'selected' : ''}`}
-            onClick={() => handleOptionSelect(option.id)}
-          >
+            onClick={() => handleOptionSelect(option.id)}>
+
             <label>
+              
               <input
                 type="radio"
                 name={`question-${question.id}`}
                 checked={option.id === selectedOptionId}
-                onChange={() => handleOptionSelect(option.id)}
-              />
+                onChange={() => handleOptionSelect(option.id)}/>
+
               {option.text}
+
             </label>
           </li>
         ))}
