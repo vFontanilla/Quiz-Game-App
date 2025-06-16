@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-function Question({ question, questionNumber, selectedOptionId, setSelectedOptionId }) {
-  const handleOptionSelect = (optionId) => {
-    setSelectedOptionId(optionId);
+function Question({ question, onAnswer, questionNumber, totalQuestions, isAnswered, userAnswer }) {
+  const [selectedOptionId, setSelectedOptionId] = useState(null);
+
+  useEffect(() => {
+    // Reset selected option when question changes if it's not already answered in a previous session
+    if (!isAnswered) {
+      setSelectedOptionId(null);
+    } else if (userAnswer) {
+      setSelectedOptionId(userAnswer.selectedOptionId);
+    }
+  }, [question, isAnswered, userAnswer]);
+
+  const handleOptionChange = (optionId) => {
+    if (!isAnswered) {
+      setSelectedOptionId(optionId);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (selectedOptionId) {
+      onAnswer(question.id, selectedOptionId);
+    }
   };
 
   return (
@@ -11,30 +30,50 @@ function Question({ question, questionNumber, selectedOptionId, setSelectedOptio
         {questionNumber}. {question.text}
       </p>
       <ul className="options-list">
-        {question.options.map((option) => (
-          <li
-            key={option.id}
-            className={`option-item ${option.id === selectedOptionId ? 'selected' : ''}`}
-            onClick={() => handleOptionSelect(option.id)}>
+        {question.options.map((option) => {
+          let itemClassName = 'option-item';
+          if (isAnswered) {
+            if (option.id === question.correctAnswerId) {
+              itemClassName += ' correct';
+            } else if (option.id === userAnswer?.selectedOptionId) {
+              itemClassName += ' incorrect';
+            }
+          } else if (option.id === selectedOptionId) {
+            itemClassName += ' selected';
+          }
 
-            <label>
-              
+          return (
+            <li
+              key={option.id}
+              className={itemClassName}
+              onClick={() => handleOptionChange(option.id)}
+            >
               <input
                 type="radio"
+                id={`${question.id}-${option.id}`}
                 name={`question-${question.id}`}
-                checked={option.id === selectedOptionId}
-                onChange={() => handleOptionSelect(option.id)}/>
-
-              {option.text}
-
-            </label>
-          </li>
-        ))}
+                value={option.id}
+                checked={isAnswered ? option.id === userAnswer?.selectedOptionId : option.id === selectedOptionId}
+                onChange={() => handleOptionChange(option.id)}
+                disabled={isAnswered}
+              />
+              <label htmlFor={`${question.id}-${option.id}`}>{option.text}</label>
+            </li>
+          );
+        })}
       </ul>
-
-      {selectedOptionId && (
-        <div className="feedback-message">
-          You selected: <strong>{question.options.find(o => o.id === selectedOptionId)?.text}</strong>
+      {!isAnswered && (
+        <button
+          onClick={handleSubmit}
+          className="quiz-button"
+          disabled={!selectedOptionId}
+        >
+          Submit Answer
+        </button>
+      )}
+      {isAnswered && userAnswer && (
+        <div className={`feedback-message ${userAnswer.isCorrect ? 'correct' : 'incorrect'}`}>
+          {userAnswer.isCorrect ? 'Correct!' : `Incorrect. The right answer was "${question.options.find(o => o.id === question.correctAnswerId)?.text}".`}
         </div>
       )}
     </div>
