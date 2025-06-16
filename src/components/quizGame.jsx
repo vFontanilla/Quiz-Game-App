@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { quizQuestions } from '../data/quizData';
 import Question from './Question';
 import Results from './Results';
-import '../QuizGame.css'; // Import component-specific styles
+import '../quizGame.css'; // Import component-specific styles
 
 function QuizGame() {
   const [questions, setQuestions] = useState([]);
